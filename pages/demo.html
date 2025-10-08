@@ -1,0 +1,70 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gronetix - Book a Demo</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Initialize EmailJS with your public key
+        (function(){
+            emailjs.init("NiI6GqhRlGkMXQbaI"); // <-- YOUR PUBLIC KEY
+        })();
+    </script>
+
+    </head>
+    <body>
+    <nav class="navbar">
+    <div class="logo">Gronetix</div>
+    <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="templates.html">Templates</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="demo.html" class="demo-btn">Book a Demo</a></li>
+    </ul>
+    </nav>
+
+    <section>
+    <h1>Book a Demo</h1>
+    <form id="demo-form">
+        <input type="text" id="name" name="name" placeholder="Your Name" required><br><br>
+        <input type="email" id="email" name="email" placeholder="Your Email" required><br><br>
+        <textarea id="message" name="message" placeholder="Your Message" required></textarea><br><br>
+        <button type="submit">Send Request</button>
+    </form>
+    <p id="form-status"></p>
+    </section>
+
+    <!-- Main JS -->
+    <script src="../js/main.js"></script>
+
+    <!-- EmailJS Integration -->
+    <script type="text/javascript">
+    document.getElementById("demo-form").addEventListener("submit", function(e){
+        e.preventDefault(); // prevent page reload
+
+        const formData = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            message: document.getElementById("message").value
+        };
+
+        // Send email using EmailJS
+        emailjs.send("service_0xaetru", "template_wy2i6gu", formData)
+        .then(function(response) {
+            document.getElementById("form-status").textContent = "Request sent successfully!";
+            document.getElementById("demo-form").reset(); // clear the form
+        }, function(error) {
+            document.getElementById("form-status").textContent = "Error sending request. Try again.";
+            console.error("EmailJS error:", error);
+        });
+    });
+    </script>
+
+    </body>
+    </html>
